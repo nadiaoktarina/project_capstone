@@ -1,0 +1,102 @@
+* {
+  font-family: 'Inter', sans-serif;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f8f9fa;
+}
+
+.dashboard-container {
+  padding: 8px;
+}
+
+.welcome-header-row {
+  background-color: #e0f2f7;
+  border-radius: 15px;
+  padding: 30px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 300px;
+  background-size: cover;
+  background-position: right center;
+  background-repeat: no-repeat;
+  position: relative;
+  z-index: 1;
+}
+
+.welcome-text {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333;
+  position: relative;
+  z-index: 1;
+}
+
+.info-card {
+  border-radius: 10px;
+  border: 1px solid #dee2e6;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+}
+.info-cards-row {
+  position: relative;
+  z-index: 0;
+  margin-bottom: 50px;
+}
+
+.info-card-title {
+  color: #6c757d;
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+}
+
+.info-card-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #343a40;
+}
+
+.food-card {
+  border-radius: 10px;
+  border: 1px solid #dee2e6;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+  overflow: hidden;
+  text-align: left;
+}
+
+.food-card-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.food-card .card-body {
+  padding: 15px; 
+}
+
+.food-card-text {
+  font-size: 1rem;
+  color: #343a40;
+  margin-bottom: 0;
+}
+
+@media (max-width: 767.98px) {
+  .welcome-header-row {
+    padding: 20px;
+    min-height: 120px;
+  }
+  .welcome-text {
+    font-size: 2rem;
+  }
+  .info-card-value {
+    font-size: 1.2rem;
+  }
+  .food-card-img {
+    height: 150px;
+  }
+}

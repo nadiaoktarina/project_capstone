@@ -1,8 +1,9 @@
-// src/pages/UploadMakanan.jsx
 import React, { useState } from 'react';
 import '../CSS/style.css'; // Pastikan path CSS ini benar
 import 'bootstrap/dist/css/bootstrap.min.css'; // Pastikan Bootstrap CSS diimpor jika diperlukan
 import { BiCamera } from 'react-icons/bi'; // Import ikon kamera dari react-icons/bi
+import AppNav from '../components/navbar';
+import Sidebar from '../components/sidebar';
 
 export default function UploadMakanan() {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -47,6 +48,7 @@ export default function UploadMakanan() {
   };
 
   return (
+    
     <div className="main-container"> {/* Main container untuk upload makanan */}
       <div className="form-container upload-form-container">
         <h2 className="form-title">Upload Foto Makanan Anda</h2>
