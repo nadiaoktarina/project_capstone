@@ -1,17 +1,23 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState } from "react";
 
-export const UserContext = createContext(null);
+export const UserContext = createContext();
+
 export const UserProvider = ({ children }) => {
+  const [isLoggedIn, setIsLoggedIn] = useState(true); // sementara true
   const [userData, setUserData] = useState({
-    nama: 'Zulkipli', 
-    fotoProfil: 'https://i.ibb.co/y4FN5bm/avatar.png',
-    tinggi: '',
-    usia: '',
-    berat: '',
+    nama: "",
+    usia: "",
+    tinggiBadan: "",
+    beratBadan: "",
+    fotoProfil: "",
   });
 
+  const updateUserData = (newData) => {
+    setUserData((prev) => ({ ...prev, ...newData }));
+  };
+
   return (
-    <UserContext.Provider value={{ userData, setUserData }}>
+    <UserContext.Provider value={{ isLoggedIn, userData, updateUserData }}>
       {children}
     </UserContext.Provider>
   );
