@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import '../CSS/style.css'; // Pastikan path CSS ini benar
-import 'bootstrap/dist/css/bootstrap.min.css'; // Pastikan Bootstrap CSS diimpor jika diperlukan
-import { BiCamera } from 'react-icons/bi'; // Import ikon kamera dari react-icons/bi
-import AppNav from '../components/navbar';
-import Sidebar from '../components/sidebar';
+import React, { useState } from "react";
+import "../CSS/style.css"; // Pastikan path CSS ini benar
+import "bootstrap/dist/css/bootstrap.min.css"; // Pastikan Bootstrap CSS diimpor jika diperlukan
+import { BiCamera } from "react-icons/bi"; // Import ikon kamera dari react-icons/bi
+import AppNav from "../components/navbar";
+import Sidebar from "../components/sidebar";
 
 export default function UploadMakanan() {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -25,13 +25,15 @@ export default function UploadMakanan() {
   };
 
   const handleUploadClick = () => {
-    document.getElementById('foodPhotoInput').click();
+    document.getElementById("foodPhotoInput").click();
   };
 
   const handleSubmit = () => {
     if (selectedFile) {
-      alert(`File siap diupload: ${selectedFile.name}, Ukuran: ${selectedFile.size} bytes`);
-      console.log('File yang akan diupload:', selectedFile);
+      alert(
+        `File siap diupload: ${selectedFile.name}, Ukuran: ${selectedFile.size} bytes`
+      );
+      console.log("File yang akan diupload:", selectedFile);
       // Lakukan proses upload ke server di sini
 
       // Reset form setelah upload
@@ -48,30 +50,33 @@ export default function UploadMakanan() {
   };
 
   return (
-
     <div className="main-container"> {/* Main container untuk upload makanan */}
       <div className="form-container upload-form-container">
         <h2 className="form-title">Upload Foto Makanan Anda</h2>
 
         <div
-          className={`photo-upload-box ${previewUrl ? 'has-image' : ''}`}
+          className={`photo-upload-box ${previewUrl ? "has-image" : ""}`}
           onClick={handleUploadClick}
           role="button"
           tabIndex={0}
           aria-label="Pilih foto makanan"
         >
           {previewUrl ? (
-            <img src={previewUrl} alt="Preview Foto Makanan" className="uploaded-image-preview" />
+            <img
+              src={previewUrl}
+              alt="Preview Foto Makanan"
+              className="uploaded-image-preview"
+            />
           ) : (
             <div className="placeholder-icon">
-              <BiCamera style={{ fontSize: '4rem', color: '#888' }} />
+              <BiCamera style={{ fontSize: "4rem", color: "#888" }} />
             </div>
           )}
           <input
             type="file"
             id="foodPhotoInput"
             accept="image/*"
-            style={{ display: 'none' }}
+            style={{ display: "none" }}
             onChange={handleFileChange}
           />
         </div>
@@ -81,7 +86,10 @@ export default function UploadMakanan() {
           <button className="btn submit-btn-kirim" onClick={handleSubmit}>
             Kirim
           </button>
-          <button className="btn btn-danger upload-batal-btn" onClick={handleCancel}>
+          <button
+            className="btn btn-danger upload-batal-btn"
+            onClick={handleCancel}
+          >
             Batal
           </button>
         </div>

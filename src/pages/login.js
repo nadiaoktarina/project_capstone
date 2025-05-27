@@ -104,7 +104,7 @@ const Login = () => {
 
               <div className="google-logo-wrapper">
                 <img
-                  src="/icons/google.png"
+                  src="/icon/google.png"
                   alt="Google"
                   className="google-logo"
                   onClick={handleGoogleLogin}

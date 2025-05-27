@@ -47,6 +47,7 @@ export default function FormPersonality() {
     updateUserData(formData);
     alert('Data dikirim. Menuju Dashboard...');
     navigate('/sidebar');
+
   };
 
   // ✅ Jika ingin mewajibkan login, aktifkan ini:

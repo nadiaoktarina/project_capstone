@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -32,7 +32,9 @@ function LayoutWrapper({ children }) {
     setSidebarOpen(!sidebarOpen);
   };
 
-  const isAuthPage = ["/login", "/register", "/forgot-password"].includes(location.pathname);
+  const isAuthPage = ["/login", "/register", "/forgot-password"].includes(
+    location.pathname
+  );
 
   return (
     <div className="App">
@@ -58,8 +60,49 @@ function AppRoutes() {
       <Route path="/" element={<Landing />} />
 
       <Route
+        path="/login"
+        element={
+          <LayoutWrapper>
+            {" "}
+            <Login />{" "}
+          </LayoutWrapper>
+        }
+      />
+      <Route
+        path="/register"
+        element={
+          <LayoutWrapper>
+            {" "}
+            <Register />{" "}
+          </LayoutWrapper>
+        }
+      />
+      <Route
+        path="/forgot-password"
+        element={
+          <LayoutWrapper>
+            {" "}
+            <ForgotPass />{" "}
+          </LayoutWrapper>
+        }
+      />
+      <Route
+        path="/detailMakanan"
+        element={
+          <LayoutWrapper>
+            {" "}
+            <DetailMakanan />{" "}
+          </LayoutWrapper>
+        }
+      />
+      <Route
         path="/dashboard"
-        element={ <LayoutWrapper> <DashboardPage /> </LayoutWrapper> }
+        element={
+          <LayoutWrapper>
+            {" "}
+            <DashboardPage />{" "}
+          </LayoutWrapper>
+        }
       />
       <Route
         path="/login"
@@ -79,19 +122,48 @@ function AppRoutes() {
       />
       <Route
         path="/diet"
-        element={ <LayoutWrapper> <DietPage /> </LayoutWrapper> }
+        element={
+          <LayoutWrapper>
+            {" "}
+            <DietPage />{" "}
+          </LayoutWrapper>
+        }
       />
       <Route
         path="/bulking"
-        element={ <LayoutWrapper> <BulkingPage /> </LayoutWrapper> }
+        element={
+          <LayoutWrapper>
+            {" "}
+            <BulkingPage />{" "}
+          </LayoutWrapper>
+        }
       />
       <Route
         path="/maintenance"
-        element={ <LayoutWrapper> <MaintenancePage /> </LayoutWrapper> }
+        element={
+          <LayoutWrapper>
+            {" "}
+            <MaintenancePage />{" "}
+          </LayoutWrapper>
+        }
+      />
+      <Route
+        path="/form-personality"
+        element={
+          <LayoutWrapper>
+            {" "}
+            <FormPersonality />{" "}
+          </LayoutWrapper>
+        }
       />
       <Route
         path="/data-diri"
-        element={ <LayoutWrapper> <DataDiriForm /> </LayoutWrapper> }
+        element={
+          <LayoutWrapper>
+            {" "}
+            <DataDiriForm />{" "}
+          </LayoutWrapper>
+        }
       />
       <Route
         path="/form-personality"
@@ -99,7 +171,12 @@ function AppRoutes() {
       />
       <Route
         path="/foto-makanan"
-        element={ <LayoutWrapper> <UploadMakanan /> </LayoutWrapper> }
+        element={
+          <LayoutWrapper>
+            {" "}
+            <UploadMakanan />{" "}
+          </LayoutWrapper>
+        }
       />
 
       {/* Not found route */}
@@ -113,13 +190,13 @@ function App() {
     <Router>
       <UserProvider>
       <link
-          href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-        />
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+      />
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      />
       <AppRoutes />
       </UserProvider>
     </Router>

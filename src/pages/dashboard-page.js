@@ -1,9 +1,9 @@
-import React from 'react';
-import { Container, Row, Col, Card, Button } from 'react-bootstrap';
-import '../CSS/dashboard.css';
+import React from "react";
+import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import "../CSS/dashboard.css";
 
-const headerBg = '/img/dashboard.jpg';
-const foodImagePlaceholder = '/img/image-27.png';
+const headerBg = "/img/dashboard.jpg";
+const foodImagePlaceholder = "/img/image-27.png";
 
 const Dashboard = () => {
   return (
@@ -92,16 +92,6 @@ const Dashboard = () => {
             </Col>
           </Row>
         </Container>
-
-        {/* <Row className="mt-4 mb-5">
-          <Col>
-            <Button className="liat-semua-btn">
-              Lihat Semua
-            </Button>
-          </Col>
-        </Row> */}
-        
-        
       </Container>
     </div>
   );
