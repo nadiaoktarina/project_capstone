@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-const Sidebar = ({ isOpen, userName = "John Doe", isLoggedIn = true }) => {
+const Sidebar = ({ isOpen, userName = "Zulkipli", isLoggedIn = true }) => {
   const [menuOpen, setMenuOpen] = useState(true);
 
   const toggleMenu = () => {
