@@ -48,7 +48,7 @@ export default function UploadMakanan() {
   };
 
   return (
-    
+
     <div className="main-container"> {/* Main container untuk upload makanan */}
       <div className="form-container upload-form-container">
         <h2 className="form-title">Upload Foto Makanan Anda</h2>
@@ -78,7 +78,7 @@ export default function UploadMakanan() {
 
         {/* Ini adalah div yang mengatur tombol "Kirim" dan "Batal" */}
         <div className="upload-buttons-container">
-          <button className="btn submit-btn upload-kirim-btn" onClick={handleSubmit}>
+          <button className="btn submit-btn-kirim" onClick={handleSubmit}>
             Kirim
           </button>
           <button className="btn btn-danger upload-batal-btn" onClick={handleCancel}>

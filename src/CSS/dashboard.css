@@ -12,39 +12,44 @@ body {
 .dashboard-container {
   padding: 8px;
 }
-
-.welcome-header-row {
-  background-color: #e0f2f7;
+.dashboard-header {
+  background-size: cover;
+  background-position: center;
+  position: relative;
   border-radius: 15px;
-  padding: 30px 40px;
+  padding: 40px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  min-height: 300px;
-  background-size: cover;
-  background-position: right center;
-  background-repeat: no-repeat;
-  position: relative;
-  z-index: 1;
+  min-height: 250px;
+   margin-bottom: 30px;
 }
 
-.welcome-text {
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: #333;
-  position: relative;
-  z-index: 1;
+.dashboard-header::before {
+  content: '';
+  position: absolute;
+  border-radius: 15px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
 }
-
-.info-card {
+.card {
   border-radius: 10px;
-  border: 1px solid #dee2e6;
+  transition: transform 0.2s;
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
 }
-.info-cards-row {
-  position: relative;
-  z-index: 0;
-  margin-bottom: 50px;
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.header-text {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #000000;
+  z-index: 1;
 }
 
 .info-card-title {
@@ -86,14 +91,14 @@ body {
 }
 
 @media (max-width: 767.98px) {
-  .welcome-header-row {
+  .dashboard-header {
     padding: 20px;
     min-height: 120px;
   }
-  .welcome-text {
+  .header-text {
     font-size: 2rem;
   }
-  .info-card-value {
+  .card-text {
     font-size: 1.2rem;
   }
   .food-card-img {
