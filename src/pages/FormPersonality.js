@@ -1,18 +1,18 @@
-import React, { useContext, useEffect, useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
-import { UserContext } from "../context/UserContext";
-import "../CSS/FormPersonality.css";
+import React, { useContext, useEffect, useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../context/UserContext';
+import '../CSS/FormPersonality.css';
 
 export default function FormPersonality() {
-  const { isLoggedIn, userData, updateUserData } = useContext(UserContext);
+  const { userData, updateUserData } = useContext(UserContext);
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    nama: "",
-    usia: "",
-    tinggiBadan: "",
-    beratBadan: "",
-    fotoProfil: "",
+    nama: '',
+    usia: '',
+    tinggiBadan: '',
+    beratBadan: '',
+    fotoProfil: '',
   });
 
   useEffect(() => {
@@ -45,8 +45,9 @@ export default function FormPersonality() {
 
   const handleSubmit = () => {
     updateUserData(formData);
-    alert("Data dikirim. Menuju Dashboard...");
-    navigate("/sidebar");
+    alert('Data dikirim. Menuju Dashboard...');
+    navigate('/sidebar');
+
   };
 
   // ✅ Jika ingin mewajibkan login, aktifkan ini:
@@ -58,15 +59,11 @@ export default function FormPersonality() {
         <div
           className="photo-box"
           onClick={handleBoxClick}
-          style={{ cursor: "pointer" }}
+          style={{ cursor: 'pointer' }}
           title="Klik untuk upload foto"
         >
           {formData.fotoProfil ? (
-            <img
-              src={formData.fotoProfil}
-              alt="Foto Profil"
-              className="photo-preview"
-            />
+            <img src={formData.fotoProfil} alt="Foto Profil" className="photo-preview" />
           ) : (
             <div className="photo-placeholder">Upload Foto</div>
           )}
@@ -76,7 +73,7 @@ export default function FormPersonality() {
           type="file"
           accept="image/*"
           onChange={handleImageChange}
-          style={{ display: "none" }}
+          style={{ display: 'none' }}
         />
       </div>
 

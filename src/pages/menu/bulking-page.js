@@ -95,7 +95,6 @@ const FoodListPage = () => {
           ))}
         </Row>
 
-        {/* Pagination */}
         <Row className="justify-content-center mt-5 mb-4">
           <Col xs="auto">
             <Pagination className="foodlist-pagination">

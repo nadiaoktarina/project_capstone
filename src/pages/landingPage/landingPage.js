@@ -57,7 +57,7 @@ export default function Landing() {
                 variant="dark"
                 className="rounded-pill px-4 py-2 mt-2"
                 as={Link}
-                to="/login"
+                to="/dashboard"
               >
                 Coba Sekarang <span className="ms-2">➔</span>
               </Button>

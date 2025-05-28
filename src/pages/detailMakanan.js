@@ -33,7 +33,7 @@ const DetailMakanan = () => {
       )}
 
       <div className={`main-content ${sidebarOpen ? "sidebar-open" : ""}`}>
-        <Container className="py-5">
+        <Container>
           <Row className="mb-4">
             <Col className="d-flex justify-content-between align-items-center">
               <h2 className="title">Detail Makanan</h2>

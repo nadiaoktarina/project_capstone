@@ -50,9 +50,7 @@ export default function UploadMakanan() {
   };
 
   return (
-    <div className="main-container">
-      {" "}
-      {/* Main container untuk upload makanan */}
+    <div className="main-container"> {/* Main container untuk upload makanan */}
       <div className="form-container upload-form-container">
         <h2 className="form-title">Upload Foto Makanan Anda</h2>
 

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-const Sidebar = ({ isOpen, userName = "John Doe", isLoggedIn = true }) => {
+const Sidebar = ({ isOpen, userName = "Zulkipli", isLoggedIn = true }) => {
   const [menuOpen, setMenuOpen] = useState(true);
 
   const toggleMenu = () => {
@@ -27,35 +27,37 @@ const Sidebar = ({ isOpen, userName = "John Doe", isLoggedIn = true }) => {
       }}
     >
       {/* Profile User */}
-      <div
-        className="d-flex align-items-center mb-4"
-        style={{ padding: "0 20px" }}
-      >
+      <Link to="/data-diri" style={{ textDecoration: "none" }}>
         <div
-          style={{
-            width: "50px",
-            height: "50px",
-            backgroundColor: "#87CEEB",
-            borderRadius: "50%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            marginRight: "15px",
-          }}
+          className="d-flex align-items-center mb-4"
+          style={{ padding: "0 20px" }}
         >
-          <i
-            className="fas fa-user"
-            style={{ color: "white", fontSize: "20px" }}
-          ></i>
-        </div>
-        <div>
-          <h6
-            style={{ color: "#343a40", marginBottom: "0", fontWeight: "600" }}
+          <div
+            style={{
+              width: "50px",
+              height: "50px",
+              backgroundColor: "#87CEEB",
+              borderRadius: "50%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              marginRight: "15px",
+            }}
           >
-            {userName}
-          </h6>
+            <i
+              className="fas fa-user"
+              style={{ color: "white", fontSize: "20px" }}
+            ></i>
+          </div>
+          <div>
+            <h6
+              style={{ color: "#343a40", marginBottom: "0", fontWeight: "600" }}
+            >
+              {userName}
+            </h6>
+          </div>
         </div>
-      </div>
+      </Link>
 
       {/* Menu Items */}
       <Nav className="flex-column">
