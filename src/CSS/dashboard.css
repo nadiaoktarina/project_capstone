@@ -17,12 +17,14 @@ body {
   background-position: center;
   position: relative;
   border-radius: 15px;
+  border: 2px solid #3a3737;
+  box-shadow: 0.10rem 0.10rem 0.60rem rgba(0, 0, 0, 0.50) !important;
   padding: 40px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   min-height: 250px;
-   margin-bottom: 30px;
+  margin-bottom: 30px;
 }
 
 .dashboard-header::before {
@@ -38,7 +40,8 @@ body {
 .card {
   border-radius: 10px;
   transition: transform 0.2s;
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+  border: 1px solid #6c757d;
+  box-shadow: 0 0.060rem 0.30rem rgba(0, 0, 0, 0.50) !important;
 }
 
 .card:hover {
@@ -48,7 +51,7 @@ body {
 .header-text {
   font-size: 2.5rem;
   font-weight: bold;
-  color: #000000;
+  color: #000000; 
   z-index: 1;
 }
 
@@ -66,8 +69,8 @@ body {
 
 .food-card {
   border-radius: 10px;
-  border: 1px solid #dee2e6;
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+  border: 1px solid #6c757d;
+  box-shadow: 0 0.060rem 0.30rem rgba(0, 0, 0, 0.50) !important;
   overflow: hidden;
   text-align: left;
 }
@@ -85,6 +88,7 @@ body {
 }
 
 .food-card-text {
+  font-weight: bold;
   font-size: 1rem;
   color: #343a40;
   margin-bottom: 0;

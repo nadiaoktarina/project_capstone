@@ -18,6 +18,23 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate(); // Untuk redirect
 
+  const fetchUserProfile = async (token) => {
+    try {
+      const res = await fetch("http://localhost:5000/user/me", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!res.ok) return null;
+
+      const result = await res.json();
+      return result.data;
+    } catch (err) {
+      return null;
+    }
+  };
+
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -32,14 +49,25 @@ const Login = () => {
     }
 
     try {
-      const userData = await loginUser(email, password);
+      const response = await loginUser(email, password);
       setErrorMessage("");
 
-      // Simpan data user atau token jika dibutuhkan
-      localStorage.setItem("user", JSON.stringify(userData));
+      // Response biasanya ada di response.data (sesuai backend)
+      // Simpan token ke localStorage (pastikan nama property-nya sesuai dengan API kamu)
+      localStorage.setItem("token", response.token || response.data.token);
 
-      // Redirect ke dashboard
-      navigate("/form-personality");
+      // Setelah token disimpan, fetch profil untuk mengecek kelengkapannya
+      const token = response.token || response.data.token;
+      const profiles = await fetchUserProfile(token);
+
+      const isProfileComplete =
+        profiles.nama && profiles.usia && profiles.berat && profiles.tinggi;
+
+      if (isProfileComplete) {
+        navigate("/dashboard");
+      } else {
+        navigate("/form-personality");
+      }
     } catch (error) {
       setErrorMessage(error.message);
     }

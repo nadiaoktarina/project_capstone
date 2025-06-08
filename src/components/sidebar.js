@@ -25,7 +25,7 @@ const Sidebar = ({ isOpen }) => {
         backgroundColor: "white",
         position: "fixed",
         left: isOpen ? 0 : "-250px",
-        top: "60px",
+        top: "0px",
         padding: "20px 0",
         fontFamily: "'Poppins', sans-serif",
         boxShadow: "2px 0 5px rgba(0,0,0,0.1)",

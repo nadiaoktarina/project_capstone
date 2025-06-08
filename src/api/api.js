@@ -302,7 +302,7 @@ export async function getRecommendation() {
     const result = await handleResponse(response);
     console.log("✅ Recommendation fetched:", result);
 
-    return result;
+    return result.data;
   } catch (error) {
     console.error("❌ Get recommendation error:", error);
     throw error;
@@ -370,6 +370,7 @@ export function getCurrentUser() {
     exp: payload.exp,
   };
 }
+
 // Request lupa password (mengirim email atau identifier ke server)
 export async function forgotPassword(email) {
   try {
@@ -410,4 +411,37 @@ export async function resetPassword(token, newPassword) {
     console.error("❌ Reset password error:", error);
     throw error;
   }
+}
+
+// menu kategori
+export async function getFoodsByCategory(category) {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    throw new Error('Token tidak ditemukan, silakan login ulang');
+  }
+
+  const categoryFormatted = category.charAt(0).toUpperCase() + category.slice(1);
+
+  const response = await fetch(`${API_BASE_URL}/foods/category/${categoryFormatted}`, {
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      // 'Content-Type': 'application/json', // opsional, tergantung API
+    },
+  });
+
+  console.log("📦 Token yang digunakan:", token);
+  console.log('🛠️ getFoodsByCategory status:', response.status);
+  console.log("📦 Kategori yang dikirim:", categoryFormatted);
+
+  if (!response.ok) throw new Error('Unauthorized or failed to fetch category');
+  const data = await response.json();
+  console.log("📂 Target kategori:", data.target);
+  
+  return data.data;
+}
+
+export async function searchFoods(query) {
+  const response = await fetch(`${API_BASE_URL}/foods/search?q=${encodeURIComponent(query)}`);
+  const result = await response.json();
+  return Array.isArray(result.data) ? result.data : [];
 }

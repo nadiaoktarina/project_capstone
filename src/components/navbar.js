@@ -1,6 +1,6 @@
 import { Navbar, Nav, Button } from "react-bootstrap";
 
-const AppNav = ({ toggleSidebar }) => {
+const AppNav = ({ toggleSidebar, isSidebarOpen }) => {
   return (
     <Navbar
       bg="white"
@@ -11,9 +11,10 @@ const AppNav = ({ toggleSidebar }) => {
         boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
         position: "fixed",
         top: 0,
-        left: 0,
-        right: 0,
+        left: isSidebarOpen ? "250px" : "0",
+        width: isSidebarOpen ? "calc(100% - 250px)" : "100%",
         zIndex: 1000,
+        transition: "all 0.3s ease",
       }}
     >
       {/* Hamburger Menu di kiri */}
@@ -39,7 +40,7 @@ const AppNav = ({ toggleSidebar }) => {
           alt="BetterBite Logo"
           style={{
             height: "25px", // Ukuran logo disesuaikan, tidak terlalu besar
-            width: "auto", // Biarkan proporsional
+            width: "auto",
             objectFit: "contain",
             display: "block",
           }}
