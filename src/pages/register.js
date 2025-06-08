@@ -8,15 +8,18 @@ import {
   Card,
   Alert,
 } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { registerUser } from "../api/api"; // pastikan path-nya sesuai
 import "../CSS/Auth.css";
 
 const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const navigate = useNavigate();
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -29,12 +32,24 @@ const Register = () => {
       return setErrorMessage("Password minimal 6 karakter.");
     }
 
-    setErrorMessage("");
-    // Lanjutkan ke proses register
+    try {
+      setErrorMessage("");
+      setSuccessMessage("");
+
+      await registerUser(email, password);
+
+      setSuccessMessage("Registrasi berhasil. Silakan login.");
+      // Redirect ke halaman login setelah 2 detik
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
+    } catch (error) {
+      setErrorMessage(error.message || "Terjadi kesalahan saat registrasi.");
+    }
   };
 
   const handleGoogleRegister = () => {
-    window.location.href = "/auth/google"; // Ganti dengan route Google login/register backend
+    window.location.href = "http://localhost:5000/auth/google"; // URL ke backend
   };
 
   return (
@@ -50,6 +65,12 @@ const Register = () => {
               {errorMessage && (
                 <Alert variant="danger" className="text-center">
                   {errorMessage}
+                </Alert>
+              )}
+
+              {successMessage && (
+                <Alert variant="success" className="text-center">
+                  {successMessage}
                 </Alert>
               )}
 

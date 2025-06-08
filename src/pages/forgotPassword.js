@@ -1,36 +1,47 @@
-// src/ForgotPassword.js
+// src/ForgotPassword.js - UPDATED VERSION
 import React, { useState } from "react";
+import { forgotPassword } from "../api/api"; // Import dari api.js
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState(null);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(null);
+    setMessage(null);
+    setLoading(true);
+
+    // Validasi email
+    if (!email || !email.includes("@")) {
+      setError("Mohon masukkan email yang valid");
+      setLoading(false);
+      return;
+    }
 
     try {
-      const response = await fetch("/api/forgot-password", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
-      });
+      console.log("🔍 Submitting forgot password for:", email);
 
-      const data = await response.json();
+      const response = await forgotPassword(email);
 
-      if (response.ok) {
-        setMessage(data.message || "Link reset telah dikirim ke email Anda.");
-        setError(null);
-      } else {
-        setError(data.error || "Terjadi kesalahan. Coba lagi.");
-        setMessage(null);
-      }
+      console.log("✅ Forgot password response:", response);
+
+      setMessage(
+        response.message || "Link reset password telah dikirim ke email Anda."
+      );
+      setError(null);
+
+      // Clear form
+      setEmail("");
     } catch (err) {
-      setError("Gagal terhubung ke server.");
+      console.error("❌ Forgot password error:", err);
+      setError(err.message || "Terjadi kesalahan. Silakan coba lagi.");
       setMessage(null);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -54,14 +65,51 @@ const ForgotPassword = () => {
               placeholder="Masukkan email Anda"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              disabled={loading}
             />
           </div>
-          {message && <div className="alert alert-success">{message}</div>}
-          {error && <div className="alert alert-danger">{error}</div>}
-          <button type="submit" className="btn btn-primary w-100">
-            Kirim Link Reset
+
+          {message && (
+            <div className="alert alert-success">
+              <strong>✅ Berhasil!</strong>
+              <br />
+              {message}
+            </div>
+          )}
+
+          {error && (
+            <div className="alert alert-danger">
+              <strong>❌ Error!</strong>
+              <br />
+              {error}
+            </div>
+          )}
+
+          <button
+            type="submit"
+            className="btn btn-primary w-100"
+            disabled={loading}
+          >
+            {loading ? (
+              <>
+                <span
+                  className="spinner-border spinner-border-sm me-2"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+                Mengirim...
+              </>
+            ) : (
+              "Kirim Link Reset"
+            )}
           </button>
         </form>
+
+        <div className="text-center mt-3">
+          <a href="/login" className="text-decoration-none">
+            ← Kembali ke Login
+          </a>
+        </div>
       </div>
     </div>
   );

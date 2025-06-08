@@ -1,13 +1,21 @@
-import { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { UserContext } from "../context/UserContext"; // Sesuaikan path dengan struktur project Anda
 
-const Sidebar = ({ isOpen, userName = "Zulkipli", isLoggedIn = true }) => {
+const Sidebar = ({ isOpen }) => {
   const [menuOpen, setMenuOpen] = useState(true);
+  const { isLoggedIn, userData } = useContext(UserContext);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
+
+  // Fallback untuk nama user
+  const displayName = userData?.nama || "User";
+
+  // Menentukan foto profil - bisa dari userData atau default
+  const profileImage = userData?.foto_profil;
 
   return (
     <div
@@ -36,25 +44,58 @@ const Sidebar = ({ isOpen, userName = "Zulkipli", isLoggedIn = true }) => {
             style={{
               width: "50px",
               height: "50px",
-              backgroundColor: "#87CEEB",
+              backgroundColor: profileImage ? "transparent" : "#87CEEB",
               borderRadius: "50%",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               marginRight: "15px",
+              overflow: "hidden",
+              border: profileImage ? "2px solid #87CEEB" : "none",
             }}
           >
+            {profileImage ? (
+              <img
+                src={profileImage}
+                alt="Profile"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                }}
+                onError={(e) => {
+                  // Fallback jika gambar gagal dimuat
+                  e.target.style.display = "none";
+                  e.target.nextSibling.style.display = "flex";
+                }}
+              />
+            ) : null}
             <i
               className="fas fa-user"
-              style={{ color: "white", fontSize: "20px" }}
+              style={{
+                color: "white",
+                fontSize: "20px",
+                display: profileImage ? "none" : "block",
+              }}
             ></i>
           </div>
           <div>
             <h6
-              style={{ color: "#343a40", marginBottom: "0", fontWeight: "600" }}
+              style={{
+                color: "#343a40",
+                marginBottom: "0",
+                fontWeight: "600",
+                fontSize: "14px",
+                lineHeight: "1.2",
+              }}
             >
-              {userName}
+              {displayName}
             </h6>
+            {/* {userData?.usia && (
+              <small style={{ color: "#6c757d", fontSize: "12px" }}>
+                {userData.usia} tahun
+              </small>
+            )} */}
           </div>
         </div>
       </Link>
@@ -167,21 +208,24 @@ const Sidebar = ({ isOpen, userName = "Zulkipli", isLoggedIn = true }) => {
       )}
 
       {/* Custom CSS */}
-      <style jsx>{`
-        .sidebar-link {
-          color: #343a40;
-          padding: 8px 0;
-          border-radius: 5px;
-          text-decoration: none;
-          display: flex;
-          align-items: center;
-        }
+      <style>
+        {`
+          .sidebar-link {
+            color: #343a40;
+            padding: 8px 0;
+            border-radius: 5px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: all 0.2s ease;
+          }
 
-        .sidebar-link:hover {
-          background-color: rgba(135, 206, 235, 0.1) !important;
-          color: #87ceeb !important;
-        }
-      `}</style>
+          .sidebar-link:hover {
+            background-color: rgba(135, 206, 235, 0.1) !important;
+            color: #87ceeb !important;
+          }
+        `}
+      </style>
     </div>
   );
 };

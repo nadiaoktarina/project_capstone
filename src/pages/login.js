@@ -8,15 +8,17 @@ import {
   Card,
   Alert,
 } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { loginUser } from "../api/api"; // Import fungsi login dari api.js
 import "../CSS/Auth.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate(); // Untuk redirect
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -29,17 +31,22 @@ const Login = () => {
       return setErrorMessage("Password minimal 6 karakter.");
     }
 
-    // Simulasi valid login
-    if (email === "user@example.com" && password === "password123") {
+    try {
+      const userData = await loginUser(email, password);
       setErrorMessage("");
-      // Arahkan ke dashboard
-    } else {
-      setErrorMessage("Email atau password salah.");
+
+      // Simpan data user atau token jika dibutuhkan
+      localStorage.setItem("user", JSON.stringify(userData));
+
+      // Redirect ke dashboard
+      navigate("/form-personality");
+    } catch (error) {
+      setErrorMessage(error.message);
     }
   };
 
   const handleGoogleLogin = () => {
-    window.location.href = "/auth/google"; // Ganti dengan route Google login backend
+    window.location.href = "http://localhost:5000/auth/google"; // Ganti dengan URL login Google backend kamu
   };
 
   return (
