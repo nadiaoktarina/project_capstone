@@ -1,13 +1,15 @@
 import React, { useState } from "react";
-import "../CSS/style.css"; // Pastikan path CSS ini benar
-import "bootstrap/dist/css/bootstrap.min.css"; // Pastikan Bootstrap CSS diimpor jika diperlukan
-import { BiCamera } from "react-icons/bi"; // Import ikon kamera dari react-icons/bi
+import "../CSS/style.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { BiCamera } from "react-icons/bi";
 import AppNav from "../components/navbar";
 import Sidebar from "../components/sidebar";
+import { useNavigate } from "react-router-dom";
 
 export default function UploadMakanan() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
+  const navigate = useNavigate();
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -28,19 +30,32 @@ export default function UploadMakanan() {
     document.getElementById("foodPhotoInput").click();
   };
 
-  const handleSubmit = () => {
-    if (selectedFile) {
-      alert(
-        `File siap diupload: ${selectedFile.name}, Ukuran: ${selectedFile.size} bytes`
-      );
-      console.log("File yang akan diupload:", selectedFile);
-      // Lakukan proses upload ke server di sini
+  const handleSubmit = async () => {
+    if (!selectedFile) {
+      alert("Mohon pilih foto makanan terlebih dahulu!");
+      return;
+    }
 
-      // Reset form setelah upload
-      setSelectedFile(null);
-      setPreviewUrl(null);
-    } else {
-      alert("Pilih foto makanan terlebih dahulu!");
+    const formData = new FormData();
+    formData.append("image", selectedFile);
+
+    try {
+      const response = await fetch("http://localhost:8000/predict", {  // PORT DIUBAH DISINI
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log("Respons dari server:", data);
+      navigate("/detailMakanan", { state: { foodData: data } });
+
+    } catch (error) {
+      console.error("Terjadi kesalahan saat mengupload gambar:", error);
+      alert("Gagal mengupload gambar. Silakan coba lagi.");
     }
   };
 
@@ -50,7 +65,9 @@ export default function UploadMakanan() {
   };
 
   return (
-    <div className="main-container"> {/* Main container untuk upload makanan */}
+    <div className="main-container">
+      <AppNav />
+      <Sidebar />
       <div className="form-container upload-form-container">
         <h2 className="form-title">Upload Foto Makanan Anda</h2>
 
@@ -81,7 +98,6 @@ export default function UploadMakanan() {
           />
         </div>
 
-        {/* Ini adalah div yang mengatur tombol "Kirim" dan "Batal" */}
         <div className="upload-buttons-container">
           <button className="btn submit-btn-kirim" onClick={handleSubmit}>
             Kirim
