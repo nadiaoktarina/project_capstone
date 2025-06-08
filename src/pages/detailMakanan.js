@@ -1,13 +1,25 @@
-import { Col, Container, Row, Card, Button, Dropdown } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { Col, Container, Row, Card, Button } from "react-bootstrap";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 import Sidebar from "../components/sidebar";
 import AppNav from "../components/navbar";
 import "../CSS/DetailMakanan.css";
 
 const DetailMakanan = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [foodDetails, setFoodDetails] = useState(null);
+
+  useEffect(() => {
+    if (location.state && location.state.foodData) {
+      setFoodDetails(location.state.foodData);
+      console.log("Data makanan diterima di DetailMakanan:", location.state.foodData);
+    } else {
+      console.warn("Tidak ada data makanan yang diterima. Mengarahkan kembali ke halaman upload.");
+      navigate("/foto-makanan");
+    }
+  }, [location.state, navigate]);
 
   const handleKembali = () => {
     navigate(-1);
@@ -17,80 +29,77 @@ const DetailMakanan = () => {
     setSidebarOpen(!sidebarOpen);
   };
 
-  const menus = [
-    { label: "Diet", icon: "fa-leaf" },
-    { label: "Bulking", icon: "fa-dumbbell" },
-    { label: "Maintenance", icon: "fa-balance-scale" },
-  ];
+  if (!foodDetails) {
+    return (
+      <div className="loading-container">
+        <p>Memuat detail makanan...</p>
+      </div>
+    );
+  }
+
+  const nutritionData = foodDetails.nutrition_info;
+  const nutritionItems = nutritionData && nutritionData !== 'Not found' ? [
+    ["Calories", `${nutritionData.calories || 'N/A'} kcal`],
+    ["Total Fat", `${nutritionData.total_fat || 'N/A'}g`],
+    ["Protein", `${nutritionData.protein || 'N/A'}g`],
+    ["Carbohydrate", `${nutritionData.carbohydrate || 'N/A'}g`],
+    ["Cholesterol", `${nutritionData.cholesterol || 'N/A'}g`],
+    ["Calcium", `${nutritionData.calcium || 'N/A'}mg`],
+    ["Fiber", `${nutritionData.fiber || 'N/A'}g`],
+    ["Iron", `${nutritionData.iron || 'N/A'}mg`],
+    ["Sugar", `${nutritionData.sugar || 'N/A'}g`],
+  ] : [];
 
   return (
     <div className="detail-makanan-wrapper">
       <AppNav toggleSidebar={toggleSidebar} />
       <Sidebar isOpen={sidebarOpen} userName="John Doe" />
-
       {sidebarOpen && (
         <div className="sidebar-overlay" onClick={toggleSidebar} />
       )}
-
       <div className={`main-content ${sidebarOpen ? "sidebar-open" : ""}`}>
         <Container>
           <Row className="mb-4">
             <Col className="d-flex justify-content-between align-items-center">
-              <h2 className="title">Detail Makanan</h2>
-              <Dropdown>
-                <Dropdown.Menu>
-                  {menus.map((menu, i) => (
-                    <Dropdown.Item key={i} eventKey={menu.label}>
-                      <i className={`fas ${menu.icon} me-2`} />
-                      {menu.label}
-                    </Dropdown.Item>
-                  ))}
-                </Dropdown.Menu>
-              </Dropdown>
+              <h2 className="title">Detail Makanan: {foodDetails.food_name}</h2>
             </Col>
           </Row>
-
-          <Row>
-            <Col lg={6} className="mb-4">
-              <Card className="photo-card">
+          <Row className="justify-content-center">
+            <Col md={6}>
+              <Card className="food-image-card">
+                <Card.Img
+                  variant="top"
+                  src={`http://localhost:8000${foodDetails.image_url}`}
+                  alt={foodDetails.food_name}
+                  className="food-detail-image"
+                />
                 <Card.Body>
-                  <Card.Title className="card-title">Foto Makanan</Card.Title>
-                  <div className="image-placeholder">
-                    <div className="text-center">
-                      <i className="fas fa-image placeholder-icon"></i>
-                      <p className="placeholder-text">Gambar Makanan</p>
-                    </div>
-                  </div>
-                  <div className="mt-3">
-                    <h5 className="food-name">Nasi Goreng Ayam</h5>
-                  </div>
+                  <Card.Title className="text-center">
+                    {foodDetails.food_name}
+                  </Card.Title>
+                  <Card.Text className="text-center text-muted">
+                    Confidence: {(foodDetails.confidence * 100).toFixed(2)}%
+                  </Card.Text>
                 </Card.Body>
               </Card>
             </Col>
-
-            <Col lg={6} className="mb-4">
+            <Col md={6}>
               <Card className="nutrition-card">
                 <Card.Body>
                   <Card.Title className="card-title">
                     Informasi Nutrisi
                   </Card.Title>
                   <div className="mt-3">
-                    {[
-                      ["Calories", "350 kcal"],
-                      ["Total Fat", "15g"],
-                      ["Protein", "15g"],
-                      ["Carbohydrate", "45g"],
-                      ["Cholesterol", "37.4g"],
-                      ["Calcium", "30mg"],
-                      ["Fiber", "30mg"],
-                      ["Iron", "2.5mg"],
-                      ["Sugar", "3g"],
-                    ].map(([label, value], i) => (
-                      <div key={i} className="nutrition-row">
-                        <span>{label}</span>
-                        <span className="fw-bold">{value}</span>
-                      </div>
-                    ))}
+                    {nutritionItems.length > 0 ? (
+                      nutritionItems.map(([label, value], i) => (
+                        <div key={i} className="nutrition-row">
+                          <span>{label}</span>
+                          <span className="fw-bold">{value}</span>
+                        </div>
+                      ))
+                    ) : (
+                      <p>Informasi nutrisi tidak ditemukan untuk makanan ini.</p>
+                    )}
                   </div>
                   <div className="mt-4">
                     <Button
