@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { UserContext } from "../context/UserContext";
-import { getProfile, isTokenValid, getCurrentUser } from "../api/api";
+import { isTokenValid, getCurrentUser, getFoodsByCategory, getRecommendation } from "../api/api";
 import { useNavigate } from "react-router-dom";
 import "../CSS/dashboard.css";
 
 const headerBg = "/img/dashboard.jpg";
-const foodImagePlaceholder = "/img/image-27.png";
 
 const Dashboard = () => {
   const { updateUserData } = useContext(UserContext);
@@ -20,7 +19,9 @@ const Dashboard = () => {
     usia: 0,
     bmi: 0,
     recommendation: "Belum ada data",
+    target: "",
   });
+  const [foods, setFoods] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -56,51 +57,42 @@ const Dashboard = () => {
           currentUser.userId
         );
 
-        // Fetch profile data
-        const profileResponse = await getProfile();
-        console.log("✅ Profile data berhasil diambil:", profileResponse);
+        const data = await getRecommendation();
 
-        if (profileResponse && profileResponse.data) {
-          const profile = profileResponse.data;
+        if (!data || !data.profile) {
+          throw new Error("Data profil tidak lengkap");
+        }
 
-          // Calculate BMI
-          let bmi = 0;
-          if (profile.berat && profile.tinggi) {
-            bmi = profile.berat / (profile.tinggi / 100) ** 2;
+        const profile = data.profile;
+
+        const updatedProfileData = {
+          nama: profile.nama || currentUser.email?.split("@")[0] || "User",
+          berat: profile.berat || 0,
+          tinggi: profile.tinggi || 0,
+          usia: profile.usia || 0,
+          bmi: profile.bmi || 0,
+          recommendation: profile.recommendation || "Belum ada rekomendasi",
+          target: profile.target || "",
+        };
+        
+        setProfileData(updatedProfileData);
+        updateUserData(profile);
+        
+        // Fetch makanan sesuai target
+        if (profile.target && typeof profile.target === "string" && profile.target.trim() !== "") {
+          const foodsResponse = await getFoodsByCategory(profile.target);
+          if (foodsResponse && Array.isArray(foodsResponse)) {
+            setFoods(foodsResponse);
           }
 
-          // Get recommendation
-          let recommendation = "Belum ada data";
-          if (bmi > 0) {
-            if (bmi < 18.5) {
-              recommendation = "Underweight - Perlu menambah berat badan";
-            } else if (bmi < 25) {
-              recommendation = "Normal - Pertahankan pola hidup sehat";
-            } else if (bmi < 30) {
-              recommendation = "Overweight - Perlu menurunkan berat badan";
-            } else {
-              recommendation = "Obese - Konsultasi dengan dokter";
-            }
-          }
-
-          const updatedProfileData = {
-            nama: profile.nama || currentUser.email?.split("@")[0] || "User",
-            berat: profile.berat || 0,
-            tinggi: profile.tinggi || 0,
-            usia: profile.usia || 0,
-            bmi: bmi > 0 ? parseFloat(bmi.toFixed(1)) : 0,
-            recommendation: recommendation,
-          };
-
-          setProfileData(updatedProfileData);
-
-          // Update context
-          updateUserData(profile);
-
-          console.log("✅ Dashboard data berhasil di-set:", updatedProfileData);
+          console.log("🎯 Target profile:", profile.target);
+          console.log("🍽️ Respon makanan dari API:", foodsResponse);
+        } else {
+          console.warn("⚠️ Target tidak ditemukan atau kosong:", data.target);
         }
       } catch (error) {
         console.error("❌ Failed to fetch dashboard data:", error);
+        setError(error.message || "Terjadi kesalahan");
 
         // Handle berbagai jenis error
         if (
@@ -249,25 +241,9 @@ const Dashboard = () => {
             <Col md={3} className="mb-3">
               <Card className="h-100 shadow-sm">
                 <Card.Body className="text-center">
-                  <Card.Title className="info-card-title">Usia</Card.Title>
+                  <Card.Title className="info-card-title">Target</Card.Title>
                   <Card.Text className="info-card-title">
-                    {profileData.usia} Tahun
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-          </Row>
-
-          {/* BMI Recommendation */}
-          <Row className="mb-4">
-            <Col>
-              <Card className="shadow-sm">
-                <Card.Body>
-                  <Card.Title className="text-center mb-3">
-                    Rekomendasi Kesehatan
-                  </Card.Title>
-                  <Card.Text className="text-center">
-                    <strong>{profileData.recommendation}</strong>
+                    {profileData.target}
                   </Card.Text>
                 </Card.Body>
               </Card>
@@ -277,68 +253,30 @@ const Dashboard = () => {
           {/* Food Recommendations */}
           <Row className="g-3 food-cards-row mb-5">
             <Col xs={12}>
-              <h4 className="mb-3">Rekomendasi Makanan</h4>
+              <h4 className="mt-3">Rekomendasi Makanan {profileData.target}</h4>
             </Col>
-            <Col xs={12} sm={6} md={3}>
-              <Card className="h-100 shadow-sm food-card">
-                <Card.Img
-                  variant="top"
-                  src={foodImagePlaceholder}
-                  alt="Big and Juicy Wagyu Beef Cheeseburger"
-                  className="food-card-img"
-                />
-                <Card.Body>
-                  <Card.Text className="food-card-text">
-                    Big and Juicy Wagyu Beef Cheeseburger
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col xs={12} sm={6} md={3}>
-              <Card className="h-100 shadow-sm food-card">
-                <Card.Img
-                  variant="top"
-                  src={foodImagePlaceholder}
-                  alt="Fresh Lime Roasted Salmon with Ginger Sauce"
-                  className="food-card-img"
-                />
-                <Card.Body>
-                  <Card.Text className="food-card-text">
-                    Fresh Lime Roasted Salmon with Ginger Sauce
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col xs={12} sm={6} md={3}>
-              <Card className="h-100 shadow-sm food-card">
-                <Card.Img
-                  variant="top"
-                  src={foodImagePlaceholder}
-                  alt="Strawberry Oatmeal Pancake with Honey Syrup"
-                  className="food-card-img"
-                />
-                <Card.Body>
-                  <Card.Text className="food-card-text">
-                    Strawberry Oatmeal Pancake with Honey Syrup
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col xs={12} sm={6} md={3}>
-              <Card className="h-100 shadow-sm food-card">
-                <Card.Img
-                  variant="top"
-                  src={foodImagePlaceholder}
-                  alt="Chicken Meatballs with Cream Cheese"
-                  className="food-card-img"
-                />
-                <Card.Body>
-                  <Card.Text className="food-card-text">
-                    Chicken Meatballs with Cream Cheese
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
+
+            {foods.length === 0 ? (
+              <Col xs={12}>
+                <p className="text-muted">Tidak ada makanan untuk kategori ini.</p>
+              </Col>
+            ) : (
+              foods.slice(0, 4).map((item, index) => (
+                <Col xs={12} sm={6} md={3} key={index}>
+                  <Card className="h-100 shadow-sm food-card">
+                    <Card.Img
+                      variant="top"
+                      src={`http://localhost:5000${item.image}`}
+                      alt={item.food}
+                      className="food-card-img"
+                    />
+                    <Card.Body>
+                      <Card.Text className="food-card-text">{item.food}</Card.Text>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              ))
+            )}
           </Row>
         </Container>
       </Container>

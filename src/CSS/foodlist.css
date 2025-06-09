@@ -51,6 +51,7 @@
 }
 
 .food-list-card-text {
+  font-weight: bold;
   font-size: 1rem;
   color: #343a40;
   margin-bottom: 0;

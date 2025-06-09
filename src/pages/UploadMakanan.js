@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import "../CSS/style.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BiCamera } from "react-icons/bi";
-import AppNav from "../components/navbar";
-import Sidebar from "../components/sidebar";
 import { useNavigate } from "react-router-dom";
 
 export default function UploadMakanan() {
@@ -66,8 +64,6 @@ export default function UploadMakanan() {
 
   return (
     <div className="main-container">
-      <AppNav />
-      <Sidebar />
       <div className="form-container upload-form-container">
         <h2 className="form-title">Upload Foto Makanan Anda</h2>
 

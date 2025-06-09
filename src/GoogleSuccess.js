@@ -1,11 +1,15 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 function GoogleSuccessPage() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
+  const [isHandled, setIsHandled] = useState(false);
+
   useEffect(() => {
+    if (isHandled) return;
+
     const token = searchParams.get("token");
     const email = searchParams.get("email");
     const userId = searchParams.get("userId");
@@ -20,31 +24,20 @@ function GoogleSuccessPage() {
 
     if (token && email && userId) {
       try {
-        // Validasi token format sebelum menyimpan
         const parts = token.split(".");
-        if (parts.length !== 3) {
-          throw new Error("Token format tidak valid");
-        }
+        if (parts.length !== 3) throw new Error("Token format tidak valid");
 
-        // Decode dan validasi payload
         const payload = JSON.parse(atob(parts[1]));
         console.log("🔍 Token payload:", payload);
 
-        // Cek apakah token memiliki user ID
         const tokenUserId = payload.userId || payload.id || payload.user_id;
-        if (!tokenUserId) {
-          throw new Error("Token tidak mengandung User ID");
-        }
+        if (!tokenUserId) throw new Error("Token tidak mengandung User ID");
 
-        // Cek apakah token expired
         const currentTime = Date.now() / 1000;
-        if (payload.exp && payload.exp < currentTime) {
+        if (payload.exp && payload.exp < currentTime)
           throw new Error("Token sudah expired");
-        }
 
-        // Clear existing data dan simpan yang baru
         localStorage.clear();
-
         localStorage.setItem("token", token);
         localStorage.setItem("email", email);
         localStorage.setItem("userId", userId);
@@ -56,7 +49,8 @@ function GoogleSuccessPage() {
           expires: new Date(payload.exp * 1000),
         });
 
-        // Delay sebentar untuk memastikan data tersimpan
+        setIsHandled(true); // cegah pemrosesan ulang
+
         setTimeout(() => {
           if (isNewUser) {
             console.log("🔄 Redirecting to form-personality (new user)");
@@ -77,11 +71,11 @@ function GoogleSuccessPage() {
         hasEmail: !!email,
         hasUserId: !!userId,
       });
-
       alert("Login Google gagal: Data tidak lengkap");
       navigate("/login");
     }
-  }, [navigate, searchParams]);
+  }, [navigate, searchParams, isHandled]);
+
 
   return (
     <div

@@ -117,7 +117,7 @@ export default function FormPersonality() {
       if (response && response.data) {
         updateUserData(response.data);
         alert("Profil berhasil dibuat! Menuju Dashboard...");
-        navigate("/sidebar");
+        navigate("/dashboard");
       }
     } catch (error) {
       console.error("Error creating profile:", error);

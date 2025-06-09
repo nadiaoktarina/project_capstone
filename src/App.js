@@ -25,6 +25,7 @@ import GoogleSuccess from "./GoogleSuccess";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { UserProvider } from "./context/UserContext";
+import { motion, AnimatePresence } from "framer-motion";
 
 function LayoutWrapper({ children }) {
   const location = useLocation();
@@ -34,13 +35,20 @@ function LayoutWrapper({ children }) {
     setSidebarOpen(!sidebarOpen);
   };
 
-  const isAuthPage = ["/login", "/register", "/forgot-password"].includes(
-    location.pathname
-  );
+  const isAuthPage = [
+    "/login",
+    "/register",
+    "/form-personality",
+    "/forgot-password",
+  ].includes(location.pathname);
+
+  const hideNavbarPages = ["/login", "/register", "/forgot-password"];
+  const isNavbarHidden = hideNavbarPages.includes(location.pathname);
 
   return (
     <div className="App">
-      {!isAuthPage && <AppNav toggleSidebar={toggleSidebar} />}
+      {!isNavbarHidden && (
+        <AppNav toggleSidebar={toggleSidebar} isSidebarOpen={sidebarOpen} />)}
       {!isAuthPage && <Sidebar isOpen={sidebarOpen} />}
       <div
         className={`content ${sidebarOpen ? "content-shifted" : ""}`}
@@ -50,7 +58,17 @@ function LayoutWrapper({ children }) {
           transition: "all 0.3s",
         }}
       >
-        {children}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={location.pathname}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.4 }}
+          >
+            {children}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   );
@@ -61,42 +79,12 @@ function AppRoutes() {
     <Routes>
       <Route path="/" element={<Landing />} />
 
-      <Route
-        path="/login"
-        element={
-          <LayoutWrapper>
-            {" "}
-            <Login />{" "}
-          </LayoutWrapper>
-        }
-      />
-      <Route
-        path="/register"
-        element={
-          <LayoutWrapper>
-            {" "}
-            <Register />{" "}
-          </LayoutWrapper>
-        }
-      />
+      <Route path="/login" element={ <Login /> } />
+      <Route path="/register" element={ <Register /> } />
       <Route
         path="/google-success"
-        element={
-          <LayoutWrapper>
-            {" "}
-            <GoogleSuccess />{" "}
-          </LayoutWrapper>
-        }
-      />
-      <Route
-        path="/forgot-password"
-        element={
-          <LayoutWrapper>
-            {" "}
-            <ForgotPassword />{" "}
-          </LayoutWrapper>
-        }
-      />
+        element={ <GoogleSuccess />} />
+      <Route path="/forgot-password" element={ <ForgotPassword /> } />
       <Route
         path="/reset-password"
         element={
@@ -152,29 +140,13 @@ function AppRoutes() {
         }
       />
       <Route
-        path="/form-personality"
-        element={
-          <LayoutWrapper>
-            {" "}
-            <FormPersonality />{" "}
-          </LayoutWrapper>
-        }
-      />
+        path="/form-personality" element={ <FormPersonality /> }/>
       <Route
         path="/data-diri"
         element={
           <LayoutWrapper>
             {" "}
             <DataDiriForm />{" "}
-          </LayoutWrapper>
-        }
-      />
-      <Route
-        path="/form-personality"
-        element={
-          <LayoutWrapper>
-            {" "}
-            <FormPersonality />{" "}
           </LayoutWrapper>
         }
       />
