@@ -83,13 +83,7 @@ function AppRoutes() {
       <Route path="/register" element={ <Register /> } />
       <Route
         path="/google-success"
-        element={
-          <LayoutWrapper>
-            {" "}
-            <GoogleSuccess />{" "}
-          </LayoutWrapper>
-        }
-      />
+        element={ <GoogleSuccess />} />
       <Route path="/forgot-password" element={ <ForgotPassword /> } />
       <Route
         path="/reset-password"
