@@ -1,14 +1,11 @@
 import { Col, Container, Row, Card, Button } from "react-bootstrap";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Sidebar from "../components/sidebar";
-import AppNav from "../components/navbar";
 import "../CSS/DetailMakanan.css";
 
 const DetailMakanan = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [foodDetails, setFoodDetails] = useState(null);
 
   useEffect(() => {
@@ -23,10 +20,6 @@ const DetailMakanan = () => {
 
   const handleKembali = () => {
     navigate(-1);
-  };
-
-  const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen);
   };
 
   if (!foodDetails) {
@@ -52,11 +45,6 @@ const DetailMakanan = () => {
 
   return (
     <div className="detail-makanan-wrapper">
-      <AppNav toggleSidebar={toggleSidebar} />
-      <Sidebar isOpen={sidebarOpen} userName="John Doe" />
-      {sidebarOpen && (
-        <div className="sidebar-overlay" onClick={toggleSidebar} />
-      )}
       <div className={`main-content ${sidebarOpen ? "sidebar-open" : ""}`}>
         <Container>
           <Row className="mb-4">
