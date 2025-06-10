@@ -45,7 +45,7 @@ const DetailMakanan = () => {
 
   return (
     <div className="detail-makanan-wrapper">
-      <div className={`main-content ${sidebarOpen ? "sidebar-open" : ""}`}>
+      <div className="">
         <Container>
           <Row className="mb-4">
             <Col className="d-flex justify-content-between align-items-center">
