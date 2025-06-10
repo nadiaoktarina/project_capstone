@@ -49,7 +49,8 @@ const Register = () => {
   };
 
   const handleGoogleRegister = () => {
-    window.location.href = "http://backendcapstone-production-2dd2.up.railway.app/auth/google"; // URL ke backend
+    window.location.href =
+      "http://backendcapstone-production-2dd2.up.railway.app/auth/google"; // URL ke backend
   };
 
   return (
@@ -114,7 +115,7 @@ const Register = () => {
 
               <div className="google-logo-wrapper">
                 <img
-                  src="/icon/google.png"
+                  src={process.env.PUBLIC_URL + "/icon/google.png"}
                   alt="Google"
                   className="google-logo"
                   onClick={handleGoogleRegister}

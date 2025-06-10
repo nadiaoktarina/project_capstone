@@ -20,11 +20,14 @@ const Login = () => {
 
   const fetchUserProfile = async (token) => {
     try {
-      const res = await fetch("https://backendcapstone-production-2dd2.up.railway.app/user/me", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await fetch(
+        "https://backendcapstone-production-2dd2.up.railway.app/user/me",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (!res.ok) return null;
 
@@ -74,7 +77,8 @@ const Login = () => {
   };
 
   const handleGoogleLogin = () => {
-    window.location.href = "http://backendcapstone-production-2dd2.up.railway.app/auth/google"; // Ganti dengan URL login Google backend kamu
+    window.location.href =
+      "http://backendcapstone-production-2dd2.up.railway.app/auth/google"; // Ganti dengan URL login Google backend kamu
   };
 
   return (
@@ -139,7 +143,7 @@ const Login = () => {
 
               <div className="google-logo-wrapper">
                 <img
-                  src="/icon/google.png"
+                  src={process.env.PUBLIC_URL + "/icon/google.png"}
                   alt="Google"
                   className="google-logo"
                   onClick={handleGoogleLogin}
