@@ -49,7 +49,7 @@ const Register = () => {
   };
 
   const handleGoogleRegister = () => {
-    window.location.href = "http://localhost:5000/auth/google"; // URL ke backend
+    window.location.href = "http://backendcapstone-production-2dd2.up.railway.app/auth/google"; // URL ke backend
   };
 
   return (

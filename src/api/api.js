@@ -1,5 +1,5 @@
 // api/api.js - FIXED VERSION
-const API_BASE_URL = "http://localhost:5000";
+const API_BASE_URL = "https://backendcapstone-production-2dd2.up.railway.app";
 
 // Fungsi untuk decode dan validasi JWT token
 function decodeToken(token) {

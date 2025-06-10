@@ -38,7 +38,7 @@ export default function UploadMakanan() {
     formData.append("image", selectedFile);
 
     try {
-      const response = await fetch("http://localhost:8000/predict", {  // PORT DIUBAH DISINI
+      const response = await fetch("https://grateful-magic-production-761e.up.railway.app/predict", {  // PORT DIUBAH DISINI
         method: "POST",
         body: formData,
       });

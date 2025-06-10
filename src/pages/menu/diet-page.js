@@ -3,7 +3,7 @@ import { Container, Row, Col, Card, Form, InputGroup, Button, Pagination } from 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import '../../CSS/foodlist.css';
-import { getFoodsByCategory, searchFoods } from '../../api/api';
+import { getFoodsByCategory } from '../../api/api';
 
 const Diet = () => {
   const [foods, setFoods] = useState([]);
@@ -121,7 +121,7 @@ const Diet = () => {
                 <Card className="h-100 shadow-sm food-list-card">
                   <Card.Img
                     variant="top"
-                    src={`http://localhost:5000${item.image}`}
+                    src={`https://backendcapstone-production-2dd2.up.railway.app${item.image}`}
                     alt={item.food}
                     className="food-list-card-img"
                   />

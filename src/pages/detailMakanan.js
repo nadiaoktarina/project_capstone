@@ -45,7 +45,7 @@ const DetailMakanan = () => {
 
   return (
     <div className="detail-makanan-wrapper">
-      <div className={`main-content ${sidebarOpen ? "sidebar-open" : ""}`}>
+      <div className="">
         <Container>
           <Row className="mb-4">
             <Col className="d-flex justify-content-between align-items-center">
@@ -57,7 +57,7 @@ const DetailMakanan = () => {
               <Card className="food-image-card">
                 <Card.Img
                   variant="top"
-                  src={`http://localhost:8000${foodDetails.image_url}`}
+                  src={`https://grateful-magic-production-761e.up.railway.app${foodDetails.image_url}`}
                   alt={foodDetails.food_name}
                   className="food-detail-image"
                 />

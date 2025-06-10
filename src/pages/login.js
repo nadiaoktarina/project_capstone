@@ -20,7 +20,7 @@ const Login = () => {
 
   const fetchUserProfile = async (token) => {
     try {
-      const res = await fetch("http://localhost:5000/user/me", {
+      const res = await fetch("https://backendcapstone-production-2dd2.up.railway.app/user/me", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -74,7 +74,7 @@ const Login = () => {
   };
 
   const handleGoogleLogin = () => {
-    window.location.href = "http://localhost:5000/auth/google"; // Ganti dengan URL login Google backend kamu
+    window.location.href = "http://backendcapstone-production-2dd2.up.railway.app/auth/google"; // Ganti dengan URL login Google backend kamu
   };
 
   return (

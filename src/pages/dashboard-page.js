@@ -266,7 +266,7 @@ const Dashboard = () => {
                   <Card className="h-100 shadow-sm food-card">
                     <Card.Img
                       variant="top"
-                      src={`http://localhost:5000${item.image}`}
+                      src={`https://backendcapstone-production-2dd2.up.railway.app${item.image}`}
                       alt={item.food}
                       className="food-card-img"
                     />

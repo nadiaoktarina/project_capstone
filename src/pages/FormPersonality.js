@@ -205,24 +205,24 @@ export default function FormPersonality() {
             />
           </div>
           <div className="form-group">
-            <label>Berat Badan (kg) *</label>
-            <input
-              name="berat"
-              type="number"
-              placeholder="Masukkan berat badan"
-              value={formData.berat}
-              onChange={handleChange}
-              min="1"
-              required
-            />
-          </div>
-          <div className="form-group">
             <label>Usia (tahun) *</label>
             <input
               name="usia"
               type="number"
               placeholder="Masukkan usia"
               value={formData.usia}
+              onChange={handleChange}
+              min="1"
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Berat Badan (kg) *</label>
+            <input
+              name="berat"
+              type="number"
+              placeholder="Masukkan berat badan"
+              value={formData.berat}
               onChange={handleChange}
               min="1"
               required
