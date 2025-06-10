@@ -209,23 +209,33 @@ const Sidebar = ({ isOpen }) => {
 
       {/* Custom CSS */}
       <style>
-        {`
-          .sidebar-link {
-            color: #343a40;
-            padding: 8px 0;
-            border-radius: 5px;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            transition: all 0.2s ease;
-          }
+          {`
+            .sidebar-link {
+              color: #343a40;
+              padding: 8px 0;
+              border-radius: 5px;
+              text-decoration: none;
+              display: flex;
+              align-items: center;
+              transition: all 0.2s ease;
+            }
 
-          .sidebar-link:hover {
-            background-color: rgba(135, 206, 235, 0.1) !important;
-            color: #87ceeb !important;
-          }
-        `}
-      </style>
+            .sidebar-link:hover {
+              background-color: rgba(135, 206, 235, 0.1) !important;
+              color: #87ceeb !important;
+            }
+
+            @media (min-width: 768px) {
+              .sidebar {
+                left: 0 !important;
+              }
+
+              .sidebar-overlay {
+                display: none !important;
+              }
+            }
+          `}
+        </style>
     </div>
   );
 };

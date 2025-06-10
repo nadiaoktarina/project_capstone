@@ -54,7 +54,7 @@ function LayoutWrapper({ children }) {
         className={`content ${sidebarOpen ? "content-shifted" : ""}`}
         style={{
           paddingTop: "100px",
-          paddingLeft: !isAuthPage && sidebarOpen ? "250px" : "0",
+          paddingLeft: !isAuthPage && sidebarOpen && window.innerWidth >= 768 ? "250px" : "0",
           transition: "all 0.3s",
         }}
       >
