@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Routes,
   Route,
   Navigate,
@@ -48,13 +48,17 @@ function LayoutWrapper({ children }) {
   return (
     <div className="App">
       {!isNavbarHidden && (
-        <AppNav toggleSidebar={toggleSidebar} isSidebarOpen={sidebarOpen} />)}
+        <AppNav toggleSidebar={toggleSidebar} isSidebarOpen={sidebarOpen} />
+      )}
       {!isAuthPage && <Sidebar isOpen={sidebarOpen} />}
       <div
         className={`content ${sidebarOpen ? "content-shifted" : ""}`}
         style={{
           paddingTop: "100px",
-          paddingLeft: !isAuthPage && sidebarOpen && window.innerWidth >= 768 ? "250px" : "0",
+          paddingLeft:
+            !isAuthPage && sidebarOpen && window.innerWidth >= 768
+              ? "250px"
+              : "0",
           transition: "all 0.3s",
         }}
       >
@@ -79,12 +83,10 @@ function AppRoutes() {
     <Routes>
       <Route path="/" element={<Landing />} />
 
-      <Route path="/login" element={ <Login /> } />
-      <Route path="/register" element={ <Register /> } />
-      <Route
-        path="/google-success"
-        element={ <GoogleSuccess />} />
-      <Route path="/forgot-password" element={ <ForgotPassword /> } />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/google-success" element={<GoogleSuccess />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route
         path="/reset-password"
         element={
@@ -139,8 +141,7 @@ function AppRoutes() {
           </LayoutWrapper>
         }
       />
-      <Route
-        path="/form-personality" element={ <FormPersonality /> }/>
+      <Route path="/form-personality" element={<FormPersonality />} />
       <Route
         path="/data-diri"
         element={
