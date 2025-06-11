@@ -27,7 +27,7 @@ export default function Landing() {
         <Container>
           <Navbar.Brand className="text-brand">
             <img
-              src="/img/BetterBite.png"
+              src={process.env.PUBLIC_URL + "/img/BetterBite.png"}
               alt="BetterBite"
               className="navbar-brand-image"
             />
@@ -61,7 +61,7 @@ export default function Landing() {
               >
                 <div className="hero-image-wrapper">
                   <img
-                    src="/img/image-27.png"
+                    src={process.env.PUBLIC_URL + "/img/image-27.png"}
                     alt="Dada Ayam"
                     className="hero-image"
                   />
@@ -104,7 +104,7 @@ export default function Landing() {
                   </Card.Body>
                   <div className="features-image-wrapper justify-content-end h-100 mt-0">
                     <img
-                      src="/img/image-2.png"
+                      src={process.env.PUBLIC_URL + "/img/image-2.png"}
                       alt="Pola Seimbang"
                     />
                   </div>
@@ -112,7 +112,7 @@ export default function Landing() {
               <Card className="shadow-sm features-card mt-5">
                   <div className="features-image-wrapper justify-content-start h-100 mt-0">
                     <img
-                      src="/img/image.png"
+                      src={process.env.PUBLIC_URL + "/img/image.png"}
                       alt="Pola Seimbang"
                     />
                   </div>

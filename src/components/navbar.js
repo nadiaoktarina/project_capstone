@@ -36,10 +36,10 @@ const AppNav = ({ toggleSidebar, isSidebarOpen }) => {
       {/* Logo gambar BetterBite di kanan */}
       <Navbar.Brand className="d-flex align-items-center">
         <img
-          src="/img/BetterBite.png"
+          src={process.env.PUBLIC_URL + "/img/BetterBite.png"}
           alt="BetterBite Logo"
           style={{
-            height: "25px", // Ukuran logo disesuaikan, tidak terlalu besar
+            height: "25px",
             width: "auto",
             objectFit: "contain",
             display: "block",

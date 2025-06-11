@@ -1,11 +1,16 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { UserContext } from "../context/UserContext";
-import { isTokenValid, getCurrentUser, getFoodsByCategory, getRecommendation } from "../api/api";
+import {
+  isTokenValid,
+  getCurrentUser,
+  getFoodsByCategory,
+  getRecommendation,
+} from "../api/api";
 import { useNavigate } from "react-router-dom";
 import "../CSS/dashboard.css";
 
-const headerBg = "/img/dashboard.jpg";
+const headerBg = process.env.PUBLIC_URL + "/img/dashboard.jpg";
 
 const Dashboard = () => {
   const { updateUserData } = useContext(UserContext);
@@ -74,12 +79,16 @@ const Dashboard = () => {
           recommendation: profile.recommendation || "Belum ada rekomendasi",
           target: profile.target || "",
         };
-        
+
         setProfileData(updatedProfileData);
         updateUserData(profile);
-        
+
         // Fetch makanan sesuai target
-        if (profile.target && typeof profile.target === "string" && profile.target.trim() !== "") {
+        if (
+          profile.target &&
+          typeof profile.target === "string" &&
+          profile.target.trim() !== ""
+        ) {
           const foodsResponse = await getFoodsByCategory(profile.target);
           if (foodsResponse && Array.isArray(foodsResponse)) {
             setFoods(foodsResponse);
@@ -258,7 +267,9 @@ const Dashboard = () => {
 
             {foods.length === 0 ? (
               <Col xs={12}>
-                <p className="text-muted">Tidak ada makanan untuk kategori ini.</p>
+                <p className="text-muted">
+                  Tidak ada makanan untuk kategori ini.
+                </p>
               </Col>
             ) : (
               foods.slice(0, 4).map((item, index) => (
@@ -271,7 +282,9 @@ const Dashboard = () => {
                       className="food-card-img"
                     />
                     <Card.Body>
-                      <Card.Text className="food-card-text">{item.food}</Card.Text>
+                      <Card.Text className="food-card-text">
+                        {item.food}
+                      </Card.Text>
                     </Card.Body>
                   </Card>
                 </Col>
