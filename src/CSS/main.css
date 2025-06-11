@@ -6,9 +6,13 @@
 }
 
 .navbar {
-  z-index: 5;
+  z-index: 2;
   position: relative;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.navbar img {
+  height: 50px;
+  width: auto;
 }
 .login-btn {
   background-color: #53C4C0 !important;
@@ -32,7 +36,6 @@ button {
 }
 
 .hero-section {
-  background-color: #A2DAE3;
   padding: 80px;
   background: linear-gradient(to bottom, white, #A2DAE3);
 }
@@ -93,25 +96,18 @@ button {
   border: none !important;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4) !important;
   display: flex;
-  align-items: center;
-}
-.features-section .features-card .card-body {
-  flex-grow: 1;
-  padding: 1.5rem;
+  flex-direction: row;
+  align-items: stretch;
 }
 .features-image-wrapper {
-  flex-shrink: 0;
   min-width: 80px;
   display: flex;
-  align-items: center;
-  justify-content: center;
   width: 40%;
-  height: 30%;
   overflow: hidden;
 }
 .features-image-wrapper img {
   border-radius: 10px;
-  width: 100%; 
+  width: 100%;
   height: 100%;
   object-fit: cover;
 }
@@ -166,20 +162,43 @@ button {
 }
 
 @media (max-width: 768px) {
-   .hero-title {
-    font-size: 1.5rem;
-  }
   .hero-section {
-    text-align: center;
-    padding: 3rem 0;
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .navbar img {
+    height: 25px;
+    width: auto;
+  }
+
+  .hero-title {
+    text-align: start;
+    font-size: 1.2rem;
+  }
+  .hero-subtitle {
+    font-size: 0.9rem;
+    text-align: start;
+    max-width: 40%;
+  }
+
+  .hero-image-wrapper {
+    width: 55%;
+  }
+  .hero-image-wrapper .hero-image {
+    max-width: 300px;
+    z-index: 9999;
   }
   .info-card {
-    transform: translateX(-50%) translateY(0);
-    bottom: -20px;
+    top: -50%;
+    left: 30%;
+    width: 180px;
+    font-size: 0.7rem;
+    z-index: 10000;
+    padding: 0.2rem 0.8rem;
   }
-  .hero-image-wrapper {
-    margin-top: 2rem;
-  }
+
   .features-image-wrapper {
     width: 90px;
   }
@@ -195,18 +214,135 @@ button {
     height: auto;
     width: auto;
   }
+
+  .footer-section {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .footer-brand {
+    font-size: 1.4rem;
+  }
+
+  .footer-description {
+    font-size: 0.75rem;
+  }
+
+  .footer-section h5 {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    padding-left: 25px;
+  }
+
+  .footer-section ul {
+    padding-left: 25px;
+    font-size: 0.75rem;
+  }
+
+  .footer-section li p {
+    margin-bottom: 0.5rem;
+  }
 }
 
 @media (max-width: 576px) {
+  .navbar img {
+    height: 24px;
+    width: auto;
+  }
+
+  .login-btn {
+    width: 120px;
+    padding: 0.4rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .hero-section {
+    padding: 2rem 1rem;
+    text-align: center;
+  }
+
   .hero-title {
-    font-size: 1.5rem;
+    text-align: start;
+    font-size: 1.2rem;
   }
-  
   .hero-subtitle {
-    font-size: 1rem;
+    font-size: 0.9rem;
+    text-align: start;
+    max-width: 40%;
   }
-  
-  .hero-image {
+
+  .hero-image-wrapper {
+    width: 55%;
+  }
+  .hero-image-wrapper .hero-image {
     max-width: 300px;
+    z-index: 9999;
+  }
+  .info-card {
+    top: -50%;
+    left: 30%;
+    width: 180px;
+    font-size: 0.7rem;
+    z-index: 10000;
+    padding: 0.2rem 0.8rem;
+  }
+
+  .info-title {
+    font-size: 0.85rem;
+  }
+
+  .info-text {
+    font-size: 0.75rem;
+  }
+
+  .features-section .features-card {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .features-image-wrapper {
+    width: 80px;
+    height: 70px;
+    margin: 0 auto 1rem;
+  }
+
+  .features-image-wrapper img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .icon-card {
+    width: 70px;
+    height: 70px;
+    padding: 15px;
+  }
+
+  .footer-section {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .footer-brand {
+    font-size: 1.4rem;
+  }
+
+  .footer-description {
+    font-size: 0.75rem;
+  }
+
+  .footer-section h5 {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    padding-left: 25px;
+  }
+
+  .footer-section ul {
+    padding-left: 0;
+    font-size: 0.75rem;
+    padding-left: 25px;
+  }
+
+  .footer-section li p {
+    margin-bottom: 0.5rem;
   }
 }

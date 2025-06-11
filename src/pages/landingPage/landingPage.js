@@ -32,6 +32,7 @@ export default function Landing() {
               className="navbar-brand-image"
             />
           </Navbar.Brand>
+
           <Nav className="ms-auto">
             <Button className="login-btn px-4" as={Link} to="/login">
               Login
@@ -53,7 +54,30 @@ export default function Landing() {
                 hari. Deteksi makanan dengan foto, dapatkan informasi gizi
                 secara instan.
               </p>
-              <Button
+            </Col>
+            <Col
+              md={6}
+                className="mt-4 mt-md-0 d-flex justify-content-center align-items-center"
+              >
+                <div className="hero-image-wrapper">
+                  <img
+                    src="/img/image-27.png"
+                    alt="Dada Ayam"
+                    className="hero-image"
+                  />
+                  <Card className="info-card">
+                    <Card.Body className="p-2">
+                      <Card.Title className="info-title">Dada Ayam</Card.Title>
+                      <Card.Text className="info-text">
+                        23 gram protein, 2 gram lemak, Kalium 330 mg, Fosfor 215
+                        mg
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
+                </div>
+              </Col>
+          </Row> 
+            <Button
                 variant="dark"
                 className="rounded-pill px-4 py-2 mt-2"
                 as={Link}
@@ -61,70 +85,16 @@ export default function Landing() {
               >
                 Coba Sekarang <span className="ms-2">➔</span>
               </Button>
-            </Col>
-
-            <Col
-              md={6}
-              className="mt-4 mt-md-0 d-flex justify-content-center align-items-center"
-            >
-              <div className="hero-image-wrapper">
-                <img
-                  src="/img/image-27.png"
-                  alt="Dada Ayam"
-                  className="hero-image"
-                />
-                <Card className="info-card">
-                  <Card.Body className="p-2">
-                    <Card.Title className="info-title">Dada Ayam</Card.Title>
-                    <Card.Text className="info-text">
-                      23 gram protein, 2 gram lemak, Kalium 330 mg, Fosfor 215
-                      mg
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-              </div>
-            </Col>
-          </Row>
         </Container>
       </section>
 
       <section className="features-section py-5">
         <Container>
-          <Row className="d-flex flex-column align-items-center">
-            <Col md={10} className="mt-5 mb-4">
-              <Card className="shadow-sm rounded-3 features-card d-flex flex-row">
-                <Card.Body className="p-4">
-                  <h5 className="fw-bold">
-                    Butuh saran makanan karena <br />{" "}
-                    <span style={{ color: "#4CA1AF" }}>Keliatan Gendut?</span>
-                  </h5>
-                  <p className="mt-2 mb-0">
-                    BetterBite siap bantu kamu memilih makanan yang sehat,
-                    sesuai kebutuhan tubuhmu.
-                  </p>
-                </Card.Body>
-                <div className="features-image-wrapper">
-                  <img
-                    src="/img/image-2.png"
-                    className="img-fluid"
-                    alt="Saran Makanan"
-                  />
-                </div>
-              </Card>
-            </Col>
-            <Col md={10} className="mt-5">
-              <Card className="shadow-sm rounded-3 features-card">
-                <div className="d-flex align-items-center">
-                  <div className="features-image-wrapper me-3">
-                    <img
-                      src="/img/image.png"
-                      className="img-fluid"
-                      alt="Pola Seimbang"
-                    />
-                  </div>
-                  <Card.Body>
+          <Row className="d-flex">
+              <Card className="shadow-sm features-card">
+                  <Card.Body className="align-items-center">
                     <h5 className="fw-bold">
-                      Bingung mengatur pola makan <br />{" "}
+                      Bingung mengatur pola makan <br />
                       <span style={{ color: "#4CA1AF" }}>Yang Seimbang?</span>
                     </h5>
                     <p className="mt-2 mb-0">
@@ -132,9 +102,31 @@ export default function Landing() {
                       porsi tepat sesuai profil kesehatan pribadi Anda.
                     </p>
                   </Card.Body>
-                </div>
+                  <div className="features-image-wrapper justify-content-end h-100 mt-0">
+                    <img
+                      src="/img/image-2.png"
+                      alt="Pola Seimbang"
+                    />
+                  </div>
               </Card>
-            </Col>
+              <Card className="shadow-sm features-card mt-5">
+                  <div className="features-image-wrapper justify-content-start h-100 mt-0">
+                    <img
+                      src="/img/image.png"
+                      alt="Pola Seimbang"
+                    />
+                  </div>
+                  <Card.Body>
+                    <h5 className="fw-bold">
+                      Bingung mengatur pola makan <br />
+                      <span style={{ color: "#4CA1AF" }}>Yang Seimbang?</span>
+                    </h5>
+                    <p className="mt-2 mb-0">
+                      BetterBite membantu merancang pola makan bermutrisi dengan
+                      porsi tepat sesuai profil kesehatan pribadi Anda.
+                    </p>
+                  </Card.Body>
+              </Card>
           </Row>
         </Container>
       </section>

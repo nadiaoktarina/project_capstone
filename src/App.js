@@ -81,9 +81,7 @@ function AppRoutes() {
 
       <Route path="/login" element={ <Login /> } />
       <Route path="/register" element={ <Register /> } />
-      <Route
-        path="/google-success"
-        element={ <GoogleSuccess />} />
+      <Route path="/google-success" element={ <GoogleSuccess />} />
       <Route path="/forgot-password" element={ <ForgotPassword /> } />
       <Route
         path="/reset-password"
