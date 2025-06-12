@@ -106,7 +106,7 @@ const ForgotPassword = () => {
         </form>
 
         <div className="text-center mt-3">
-          <a href="/login" className="text-decoration-none">
+          <a href="#/login" className="text-decoration-none">
             ← Kembali ke Login
           </a>
         </div>
