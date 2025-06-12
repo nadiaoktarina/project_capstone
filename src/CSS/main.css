@@ -246,7 +246,7 @@ button {
 
 @media (max-width: 576px) {
   .navbar img {
-    height: 24px;
+    height: 20px;
     width: auto;
   }
 
@@ -272,7 +272,7 @@ button {
   }
 
   .hero-image-wrapper {
-    width: 55%;
+    width: 50px;
   }
   .hero-image-wrapper .hero-image {
     max-width: 300px;

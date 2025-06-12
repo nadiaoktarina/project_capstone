@@ -142,7 +142,7 @@ export default function FormPersonality() {
   };
 
   return (
-    <div className="form-container-flex">
+    <div className="form-container-flex container">
       <div className="image-section">
         <div
           className="photo-box"
