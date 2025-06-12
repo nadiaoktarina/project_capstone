@@ -11,9 +11,14 @@ const DetailMakanan = () => {
   useEffect(() => {
     if (location.state && location.state.foodData) {
       setFoodDetails(location.state.foodData);
-      console.log("Data makanan diterima di DetailMakanan:", location.state.foodData);
+      console.log(
+        "Data makanan diterima di DetailMakanan:",
+        location.state.foodData
+      );
     } else {
-      console.warn("Tidak ada data makanan yang diterima. Mengarahkan kembali ke halaman upload.");
+      console.warn(
+        "Tidak ada data makanan yang diterima. Mengarahkan kembali ke halaman upload."
+      );
       navigate("/foto-makanan");
     }
   }, [location.state, navigate]);
@@ -31,17 +36,20 @@ const DetailMakanan = () => {
   }
 
   const nutritionData = foodDetails.nutrition_info;
-  const nutritionItems = nutritionData && nutritionData !== 'Not found' ? [
-    ["Calories", `${nutritionData.calories || 'N/A'} kcal`],
-    ["Total Fat", `${nutritionData.total_fat || 'N/A'}g`],
-    ["Protein", `${nutritionData.protein || 'N/A'}g`],
-    ["Carbohydrate", `${nutritionData.carbohydrate || 'N/A'}g`],
-    ["Cholesterol", `${nutritionData.cholesterol || 'N/A'}g`],
-    ["Calcium", `${nutritionData.calcium || 'N/A'}mg`],
-    ["Fiber", `${nutritionData.fiber || 'N/A'}g`],
-    ["Iron", `${nutritionData.iron || 'N/A'}mg`],
-    ["Sugar", `${nutritionData.sugar || 'N/A'}g`],
-  ] : [];
+  const nutritionItems =
+    nutritionData && nutritionData !== "Not found"
+      ? [
+          ["Calories", `${nutritionData.calories || "N/A"} kcal`],
+          ["Total Fat", `${nutritionData.total_fat || "N/A"}g`],
+          ["Protein", `${nutritionData.protein || "N/A"}g`],
+          ["Carbohydrate", `${nutritionData.carbohydrate || "N/A"}g`],
+          ["Cholesterol", `${nutritionData.cholesterol || "N/A"}mg`],
+          ["Calcium", `${nutritionData.calcium || "N/A"}mg`],
+          ["Fiber", `${nutritionData.fiber || "N/A"}g`],
+          ["Iron", `${nutritionData.iron || "N/A"}mg`],
+          ["Sugar", `${nutritionData.sugar || "N/A"}g`],
+        ]
+      : [];
 
   return (
     <div className="detail-makanan-wrapper">
@@ -86,7 +94,9 @@ const DetailMakanan = () => {
                         </div>
                       ))
                     ) : (
-                      <p>Informasi nutrisi tidak ditemukan untuk makanan ini.</p>
+                      <p>
+                        Informasi nutrisi tidak ditemukan untuk makanan ini.
+                      </p>
                     )}
                   </div>
                   <div className="mt-4">
