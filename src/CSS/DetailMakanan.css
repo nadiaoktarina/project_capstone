@@ -187,6 +187,12 @@
   .nutrition-card {
     max-width: 350px;
   }
+
+  /* Jarak normal untuk tablet landscape */
+  .photo-card,
+  .nutrition-card {
+    margin-bottom: 1.5rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -200,13 +206,14 @@
     text-align: center;
   }
 
-  .photo-card,
-  .nutrition-card {
-    margin-bottom: 1rem;
+  .photo-card {
+    margin-bottom: 2rem; /* Tambah jarak setelah card foto */
   }
 
   .nutrition-card {
+    margin-bottom: 1.5rem;
     max-width: 100%;
+    margin-top: 1rem; /* Tambah jarak sebelum card nutrisi */
   }
 
   .image-placeholder {
@@ -262,9 +269,13 @@
     margin-bottom: 10px;
   }
 
-  .photo-card,
+  .photo-card {
+    margin-bottom: 2.5rem; /* Jarak lebih besar di layar sangat kecil */
+  }
+
   .nutrition-card {
-    margin-bottom: 0.8rem;
+    margin-bottom: 1.5rem;
+    margin-top: 1.5rem; /* Jarak lebih besar sebelum card nutrisi */
   }
 
   .photo-card .card-body,
@@ -313,6 +324,14 @@
 @media (max-width: 480px) {
   .title {
     font-size: 1.2rem;
+  }
+
+  .photo-card {
+    margin-bottom: 3rem; /* Jarak maksimal di layar sangat kecil */
+  }
+
+  .nutrition-card {
+    margin-top: 2rem; /* Jarak maksimal sebelum card nutrisi */
   }
 
   .image-placeholder {
