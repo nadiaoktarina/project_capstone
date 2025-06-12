@@ -1,6 +1,6 @@
-// src/ForgotPassword.js - UPDATED VERSION
 import React, { useState } from "react";
-import { forgotPassword } from "../api/api"; // Import dari api.js
+import { Link } from "react-router-dom"; // ⬅️ Tambahkan ini
+import { forgotPassword } from "../api/api";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const ForgotPassword = () => {
@@ -15,7 +15,6 @@ const ForgotPassword = () => {
     setMessage(null);
     setLoading(true);
 
-    // Validasi email
     if (!email || !email.includes("@")) {
       setError("Mohon masukkan email yang valid");
       setLoading(false);
@@ -33,8 +32,6 @@ const ForgotPassword = () => {
         response.message || "Link reset password telah dikirim ke email Anda."
       );
       setError(null);
-
-      // Clear form
       setEmail("");
     } catch (err) {
       console.error("❌ Forgot password error:", err);
@@ -106,9 +103,9 @@ const ForgotPassword = () => {
         </form>
 
         <div className="text-center mt-3">
-          <a href="#/login" className="text-decoration-none">
+          <Link to="/login" className="text-decoration-none">
             ← Kembali ke Login
-          </a>
+          </Link>
         </div>
       </div>
     </div>
